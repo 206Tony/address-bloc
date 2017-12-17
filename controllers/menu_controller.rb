@@ -1,6 +1,7 @@
 require_relative '../models/address_book'
+require_relative '../models/entry.rb'
 
-class MenuController
+class MenuController 
   attr_reader :address_book
 
   def initialize
