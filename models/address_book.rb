@@ -2,14 +2,11 @@ require_relative 'entry'
 require "csv"
 require 'bloc_record/base'
 
-class AddressBook < BlocRecord::Base 
+class AddressBook < BlocRecord::Base
+  has_many :entries
 
   def add_entry(name, phone, email)
-    Entry.create(name: name, phone_number: phone, email: email)
-  end
-
-  def entries
-    Entry.where(address_book_id: self.id)
+    Entry.create(name: name, phone_number: phone, email: email, address_book_id: self.id)
   end
 
   def find_entry(name)
@@ -19,6 +16,7 @@ class AddressBook < BlocRecord::Base
   def import_from_csv(file_name)
     # Implementation goes here
     csv_text = File.read(file_name)
+    p csv_text
     csv = CSV.parse(csv_text, headers: true, skip_blanks: true)
     csv.each do |row|
       row_hash = row.to_hash
