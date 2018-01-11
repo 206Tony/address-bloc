@@ -1,5 +1,5 @@
 require_relative '../models/address_book'
-require_relative '../models/entry.rb'
+# require_relative '../models/entry.rb'
 
 class MenuController 
   attr_reader :address_book
@@ -97,7 +97,7 @@ class MenuController
   def search_entries
     print "Search by name: "
     name = gets.chomp
-    match = @address_book.find_entry(name)
+    match = Entry.find_entry(name)
     system "clear"
     if match
       puts match.to_s
